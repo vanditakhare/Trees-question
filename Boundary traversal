@@ -1,0 +1,51 @@
+class Solution {
+public:
+void traversel(Node *root, vector<int>&ans){
+    if(root==NULL ||(root->left==NULL&&root->right==NULL))
+        return ;
+        ans.push_back(root->data);
+        if(root->left!=NULL)
+         traversel(root->left,ans);
+        else
+         traversel(root->right,ans);
+    
+    
+}
+void traverseleaf(Node *root, vector<int>&ans){
+    if(root==NULL)
+        return ;
+    if(root->left==NULL &&root->right==NULL){
+    ans.push_back(root->data);
+    return;
+    }
+    traverseleaf(root->left,ans);
+    traverseleaf(root->right,ans);
+ }
+ 
+void traverser(Node *root, vector<int>&ans){
+     if(root==NULL ||(root->left==NULL&&root->right==NULL))
+        return ;
+       if(root->right)
+       traverser(root->right,ans);
+       else
+       traverser(root->left,ans);
+       ans.push_back(root->data);
+       
+   
+        
+    
+}
+    vector <int> boundary(Node *root)
+    {
+        
+        vector<int>ans;
+        if(root==NULL)
+        return ans;
+        ans.push_back(root->data);
+        traversel(root->left,ans);
+         traverseleaf(root->left,ans);
+          traverseleaf(root->right,ans);
+          traverser(root->right,ans);
+          return ans;
+    }
+};
